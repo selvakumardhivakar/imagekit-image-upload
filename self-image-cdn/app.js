@@ -3,7 +3,8 @@ const app = express();
 const multer = require("multer");
 const fs = require("fs");
 const crypto = require("crypto");
-
+const cors = require("cors");
+app.use(cors());
 app.use(express.json());
 
 // @desc: multer configuration
@@ -26,6 +27,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 app.post("/upload", upload.array("upload"), async (req, res) => {
+  console.log(req.files);
   res.send(req.files);
 });
 
@@ -42,6 +44,6 @@ app.get("/cdn/images/:id", async (req, res) => {
   // });
 });
 
-app.listen(process.env.PORT || 8080, () => {
-  console.log(`Server is running on ${process.env.PORT || 8080}`);
+app.listen(8081, () => {
+  console.log(`Server is running on ${8081}`);
 });

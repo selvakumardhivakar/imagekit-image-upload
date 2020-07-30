@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <img src="http://localhost:8080/cdn/images/605ee5bab03fb53f297cd940a531bb58.jpg"/>
-  <img src="http://localhost:8080/cdn/images/dbb6f455d98c571d505ae6184e3399fe.jpg"/>
-  <img src="http://localhost:8080/cdn/images/233d0726bf6323ab53ed066a2005c280.png"/>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="file" accept="image/*" id="input-image" multiple />
+    <button id="upload">Upload</button>
+
+    <script>
+      // select file input
+      const input = document.getElementById("input-image");
+
+      // add event listener
+      upload.addEventListener("click", () => {
+        uploadFile(input.files[0]);
+      });
+      const uploadFile = (file) => {
+        // add file to FormData object
+        const fd = new FormData();
+        fd.append("upload", file);
+
+        // send `POST` request
+        fetch("http://localhost:8081/upload", {
+          method: "POST",
+          body: fd,
+        })
+          .then((res) => res.json())
+          .then((json) => {
+            console.log(json);
+          })
+          .catch((err) => console.error(err));
+      };
+    </script>
+  </body>
 </html>
