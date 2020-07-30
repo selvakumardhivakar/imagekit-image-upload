@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "cdn:dev":"nodemon self-image-cdn/app.js"
   },
   "keywords": [],
   "author": "",
